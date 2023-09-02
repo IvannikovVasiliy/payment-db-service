@@ -1,4 +1,4 @@
-package ru.neoflex.scammertracking.paymentdb.error.exception;
+package ru.neoflex.scammertracking.paymentdb.exception;
 
 public class PaymentNotFoundException extends RuntimeException {
 

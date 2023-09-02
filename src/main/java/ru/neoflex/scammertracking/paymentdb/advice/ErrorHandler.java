@@ -1,12 +1,12 @@
-package ru.neoflex.scammertracking.paymentdb.error.handler;
+package ru.neoflex.scammertracking.paymentdb.advice;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ru.neoflex.scammertracking.paymentdb.domain.dto.MessageInfoDto;
-import ru.neoflex.scammertracking.paymentdb.error.exception.PaymentNotFoundException;
+import ru.neoflex.scammertracking.paymentdb.exception.PaymentAlreadyExistsException;
+import ru.neoflex.scammertracking.paymentdb.exception.PaymentNotFoundException;
 import ru.neoflex.scammertracking.paymentdb.utils.Constants;
 
 @RestControllerAdvice
@@ -22,4 +22,11 @@ public class ErrorHandler {
         return messageInfo;
     }
 
+    @ExceptionHandler(PaymentAlreadyExistsException.class)
+    @ResponseStatus(value = HttpStatus.FORBIDDEN)
+    public MessageInfoDto handlePaymentNotFound(PaymentAlreadyExistsException resourceExists) {
+        messageInfo.setRespCode(Constants.BAD_REQUEST);
+        messageInfo.setMessage(resourceExists.getMessage());
+        return messageInfo;
+    }
 }

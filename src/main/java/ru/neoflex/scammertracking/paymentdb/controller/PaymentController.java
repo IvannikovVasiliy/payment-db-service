@@ -1,27 +1,23 @@
 package ru.neoflex.scammertracking.paymentdb.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.neoflex.scammertracking.paymentdb.domain.dto.GetLastPaymentRequestDto;
-import ru.neoflex.scammertracking.paymentdb.domain.dto.PaymentResponseDto;
-import ru.neoflex.scammertracking.paymentdb.domain.dto.SavePaymentRequestDto;
+import ru.neoflex.scammertracking.paymentdb.domain.dto.*;
+import ru.neoflex.scammertracking.paymentdb.service.LogService;
 import ru.neoflex.scammertracking.paymentdb.service.PaymentService;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/payment")
 public class PaymentController {
 
-    @Autowired
-    public PaymentController(PaymentService paymentService) {
-        this.paymentService = paymentService;
-    }
-
-    private PaymentService paymentService;
+    private final PaymentService paymentService;
 
     @PostMapping("/last-payment")
     public PaymentResponseDto getLastPaymentByReceiverCardNumber(@RequestBody GetLastPaymentRequestDto payment) {
-        PaymentResponseDto responseDto = paymentService.getLastPayment(payment);
+        PaymentResponseDto responseDto = paymentService.getLastPayment(payment.getCardNumber());
 
         return responseDto;
     }
@@ -29,8 +25,38 @@ public class PaymentController {
     @PostMapping("/save")
     @ResponseStatus(value = HttpStatus.CREATED)
     public String savePayment(@RequestBody SavePaymentRequestDto payment) {
-        String response = String.format("The payment with id=%s was saved", paymentService.savePayment(payment));
+        paymentService.savePayment(payment);
 
-        return response;
+        return "The payment was saved";
     }
+
+    //    @Autowired
+//    public PaymentController(CommonPaymentService commonPaymentService) {
+//        this.commonPaymentService = commonPaymentService;
+//    }
+//
+//    private CommonPaymentService commonPaymentService;
+
+//    @PostMapping("/last-payment")
+//    public PaymentResponseDto getLastPaymentByReceiverCardNumber(@RequestBody GetLastPaymentRequestDto payment) {
+//        PaymentResponseDto responseDto = commonPaymentService.getLastPayment(payment.getCardNumber());
+//
+//        return responseDto;
+//    }
+//
+//    @PostMapping
+//    @ResponseStatus(value = HttpStatus.CREATED)
+//    public String createPayment(@RequestBody CreatePaymentRequestDto paymentRequest) {
+//        commonPaymentService.insertPayments(paymentRequest.getIdCardNumber());
+//        String response = "The rows were created";
+//
+//        return response;
+//    }
+//
+//    @PutMapping
+//    public UpdatePaymentResponseDto updatePayment(@RequestBody UpdatePaymentRequestDto updatePaymentRequest) {
+//        UpdatePaymentResponseDto updateResponse = commonPaymentService.updatePayments(updatePaymentRequest);
+//
+//        return updateResponse;
+//    }
 }

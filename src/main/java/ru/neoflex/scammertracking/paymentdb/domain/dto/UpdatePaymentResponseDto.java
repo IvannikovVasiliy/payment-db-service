@@ -3,11 +3,10 @@ package ru.neoflex.scammertracking.paymentdb.domain.dto;
 import ru.neoflex.scammertracking.paymentdb.domain.model.Coordinates;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
-public class SavePaymentRequestDto {
+public class UpdatePaymentResponseDto {
 
-    public SavePaymentRequestDto(long id, String payerCardNumber, String receiverCardNumber, Coordinates coordinates, Date date) {
+    public UpdatePaymentResponseDto(long id, String payerCardNumber, String receiverCardNumber, Coordinates coordinates, LocalDateTime date) {
         this.id = id;
         this.payerCardNumber = payerCardNumber;
         this.receiverCardNumber = receiverCardNumber;
@@ -15,14 +14,14 @@ public class SavePaymentRequestDto {
         this.date = date;
     }
 
-    public SavePaymentRequestDto() {
+    public UpdatePaymentResponseDto() {
     }
 
     private long id;
     private String payerCardNumber;
     private String receiverCardNumber;
     private Coordinates coordinates;
-    private Date date;
+    private LocalDateTime date;
 
     public long getId() {
         return id;
@@ -56,11 +55,11 @@ public class SavePaymentRequestDto {
         this.coordinates = coordinates;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 }
