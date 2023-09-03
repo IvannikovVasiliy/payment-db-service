@@ -1,11 +1,12 @@
 package ru.neoflex.scammertracking.paymentdb.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.neoflex.scammertracking.paymentdb.domain.dto.*;
-import ru.neoflex.scammertracking.paymentdb.service.LogService;
+import ru.neoflex.scammertracking.paymentdb.domain.dto.GetLastPaymentRequestDto;
+import ru.neoflex.scammertracking.paymentdb.domain.dto.PaymentResponseDto;
+import ru.neoflex.scammertracking.paymentdb.domain.dto.SavePaymentRequestDto;
 import ru.neoflex.scammertracking.paymentdb.service.PaymentService;
 
 @RestController
@@ -16,7 +17,7 @@ public class PaymentController {
     private final PaymentService paymentService;
 
     @PostMapping("/last-payment")
-    public PaymentResponseDto getLastPaymentByReceiverCardNumber(@RequestBody GetLastPaymentRequestDto payment) {
+    public PaymentResponseDto getLastPaymentByReceiverCardNumber(@Valid @RequestBody GetLastPaymentRequestDto payment) {
         PaymentResponseDto responseDto = paymentService.getLastPayment(payment.getCardNumber());
 
         return responseDto;
@@ -24,7 +25,7 @@ public class PaymentController {
 
     @PostMapping("/save")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public String savePayment(@RequestBody SavePaymentRequestDto payment) {
+    public String savePayment(@Valid @RequestBody SavePaymentRequestDto payment) {
         paymentService.savePayment(payment);
 
         return "The payment was saved";

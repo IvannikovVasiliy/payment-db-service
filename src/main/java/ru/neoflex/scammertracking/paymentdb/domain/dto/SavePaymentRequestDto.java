@@ -1,8 +1,8 @@
 package ru.neoflex.scammertracking.paymentdb.domain.dto;
 
+import jakarta.validation.constraints.Size;
 import ru.neoflex.scammertracking.paymentdb.domain.model.Coordinates;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 public class SavePaymentRequestDto {
@@ -19,7 +19,9 @@ public class SavePaymentRequestDto {
     }
 
     private long id;
+    @Size(min = 6, max = 50, message = "The length of payerCardNumber should be between 6 and 50")
     private String payerCardNumber;
+    @Size(min = 6, max = 50, message = "The length of receiverCardNumber should be between 6 and 50")
     private String receiverCardNumber;
     private Coordinates coordinates;
     private Date date;
