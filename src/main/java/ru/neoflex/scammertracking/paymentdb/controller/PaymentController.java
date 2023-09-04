@@ -17,7 +17,7 @@ public class PaymentController {
     private final PaymentService paymentService;
 
     @PostMapping("/last-payment")
-    public PaymentResponseDto getLastPaymentByReceiverCardNumber(@Valid @RequestBody GetLastPaymentRequestDto payment) {
+    public PaymentResponseDto getLastPaymentByPayerCardNumber(@Valid @RequestBody GetLastPaymentRequestDto payment) {
         PaymentResponseDto responseDto = paymentService.getLastPayment(payment.getCardNumber());
 
         return responseDto;

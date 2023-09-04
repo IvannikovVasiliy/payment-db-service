@@ -29,7 +29,7 @@ public class ErrorHandler {
     }
 
     @ExceptionHandler(PaymentAlreadyExistsException.class)
-    @ResponseStatus(value = HttpStatus.FORBIDDEN)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public MessageInfoDto handlePaymentNotFound(PaymentAlreadyExistsException resourceExists) {
         messageInfo.setRespCode(Constants.BAD_REQUEST);
         messageInfo.setMessage(resourceExists.getMessage());

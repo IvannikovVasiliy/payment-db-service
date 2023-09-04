@@ -1,6 +1,5 @@
 package ru.neoflex.scammertracking.paymentdb.service.impl;
 
-import jakarta.validation.constraints.Size;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.dao.DuplicateKeyException;

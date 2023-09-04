@@ -9,8 +9,18 @@ services:
     environment:
       POSTGRES_USER: POSTGRES
       POSTGRES_PASSWORD: POSTGRES
+      POSTGRES_DB: paymentdb
     volumes:
       - local_postgres_payment_db:/var/lib/postgresql/data
+
+  payment-service:
+    container_name: payment-service
+    image: payment-db-service
+    build: ./
+    ports:
+      - "8082:8082"
+    depends_on:
+      - payment-db
 
 volumes:
   local_postgres_payment_db:
