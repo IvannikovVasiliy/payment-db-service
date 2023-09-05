@@ -12,6 +12,8 @@ services:
       POSTGRES_DB: paymentdb
     volumes:
       - local_postgres_payment_db:/var/lib/postgresql/data
+    networks:
+      - analyzer-network
 
   payment-service:
     container_name: payment-service
@@ -21,6 +23,13 @@ services:
       - "8082:8082"
     depends_on:
       - payment-db
+    networks:
+      - analyzer-network
 
 volumes:
   local_postgres_payment_db:
+
+networks:
+  analyzer-network:
+    name: analyzer-network
+    driver: bridge
