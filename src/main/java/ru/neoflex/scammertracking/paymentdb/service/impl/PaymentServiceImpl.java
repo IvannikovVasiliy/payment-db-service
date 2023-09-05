@@ -1,5 +1,6 @@
 package ru.neoflex.scammertracking.paymentdb.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.dao.DuplicateKeyException;
@@ -22,19 +23,14 @@ import ru.neoflex.scammertracking.paymentdb.service.PaymentService;
 
 @Service
 @Transactional(isolation = Isolation.READ_COMMITTED)
+@RequiredArgsConstructor
 @Validated
 @Slf4j
 public class PaymentServiceImpl implements PaymentService {
 
-    public PaymentServiceImpl(JdbcTemplate jdbcTemplate, ModelMapper modelMapper, LogService logService) {
-        this.jdbcTemplate = jdbcTemplate;
-        this.modelMapper = modelMapper;
-        this.logService = logService;
-    }
-
     private final JdbcTemplate jdbcTemplate;
     private final ModelMapper modelMapper;
-    private LogService logService;
+    private final LogService logService;
 
     @Override
     public PaymentResponseDto getLastPayment(String cardNumber) {

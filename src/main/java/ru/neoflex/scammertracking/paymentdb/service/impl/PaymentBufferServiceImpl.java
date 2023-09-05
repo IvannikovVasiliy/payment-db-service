@@ -15,13 +15,23 @@ public class PaymentBufferServiceImpl implements PaymentBufferService {
 
     @Override
     public PaymentBufferEntity getPaymentByCardNumber(String cardNumber) {
-        PaymentBufferEntity buffer = jdbcTemplate.queryForObject("select * from payment_buffer where id_card_number=?", PaymentBufferEntity.class, cardNumber);
-
-        return buffer;
+        return null;
     }
 
     @Override
     public void insertPaymentBuffer(String idCardNumber) {
-        jdbcTemplate.update("INSERT INTO payments_buffer(id_pk_payment, id_card_number, offset_pos) VALUES(null, ?, 0)", idCardNumber);
+
     }
+
+    //    @Override
+//    public PaymentBufferEntity getPaymentByCardNumber(String cardNumber) {
+//        PaymentBufferEntity buffer = jdbcTemplate.queryForObject("select * from payment_buffer where id_card_number=?", PaymentBufferEntity.class, cardNumber);
+//
+//        return buffer;
+//    }
+//
+//    @Override
+//    public void insertPaymentBuffer(String idCardNumber) {
+//        jdbcTemplate.update("INSERT INTO payments_buffer(id_pk_payment, id_card_number, offset_pos) VALUES(null, ?, 0)", idCardNumber);
+//    }
 }

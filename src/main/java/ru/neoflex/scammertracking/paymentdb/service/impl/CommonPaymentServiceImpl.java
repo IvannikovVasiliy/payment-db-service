@@ -1,24 +1,19 @@
 package ru.neoflex.scammertracking.paymentdb.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.neoflex.scammertracking.paymentdb.service.CommonPaymentService;
 import ru.neoflex.scammertracking.paymentdb.service.PaymentBufferService;
 import ru.neoflex.scammertracking.paymentdb.service.PaymentService;
 
 @Service
+@RequiredArgsConstructor
 @Slf4j
 public class CommonPaymentServiceImpl implements CommonPaymentService {
 
-    @Autowired
-    public CommonPaymentServiceImpl(PaymentService paymentService, PaymentBufferService bufferService) {
-        this.bufferService = bufferService;
-        this.paymentService = paymentService;
-    }
-
-    private PaymentService paymentService;
-    private PaymentBufferService bufferService;
+    private final PaymentService paymentService;
+    private final PaymentBufferService bufferService;
 
 //    @Override
 //    public PaymentResponseDto getLastPayment(GetLastPaymentRequestDto getLastPaymentRequestDto) {
