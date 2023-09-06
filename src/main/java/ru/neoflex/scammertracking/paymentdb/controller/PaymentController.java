@@ -3,6 +3,7 @@ package ru.neoflex.scammertracking.paymentdb.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.neoflex.scammertracking.paymentdb.domain.dto.GetLastPaymentRequestDto;
 import ru.neoflex.scammertracking.paymentdb.domain.dto.PaymentResponseDto;

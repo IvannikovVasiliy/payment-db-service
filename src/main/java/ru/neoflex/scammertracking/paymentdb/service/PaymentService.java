@@ -7,7 +7,7 @@ import ru.neoflex.scammertracking.paymentdb.domain.dto.SavePaymentRequestDto;
 
 public interface PaymentService {
     void savePayment(@Valid SavePaymentRequestDto payment);
-    PaymentResponseDto getLastPayment(@Size(min = 6, max = 60, message = "The length of cardNumber should be between 6 and 50") String cardNumber);
+    PaymentResponseDto getLastPayment(@Size(min = 6, max = 60, message = "The length of cardNumber should be between 6 and 60") String cardNumber);
 //    PaymentResponseDto getLastPayment(Long id);
 //    void insertNullPayments(String idCardNumber);
 //    void insertPaymentBuffer(String idCardNumber);
